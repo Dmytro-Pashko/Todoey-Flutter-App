@@ -10,17 +10,14 @@ class TasksList extends StatelessWidget {
         TaskTileWidget(
           label: 'Buy milk',
           isChecked: false,
-          onChanged: (value) {},
         ),
         TaskTileWidget(
           label: 'Buy eggs',
           isChecked: false,
-          onChanged: (value) {},
         ),
         TaskTileWidget(
           label: 'Buy detergent',
           isChecked: false,
-          onChanged: (value) {},
         ),
       ],
     );
