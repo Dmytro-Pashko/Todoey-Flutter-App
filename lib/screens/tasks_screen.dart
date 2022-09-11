@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_flutter/screens/widgets/add_task.dart';
 
-import 'widgets/tasks_list.dart';
+import '../widgets/add_task.dart';
+import '../widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
