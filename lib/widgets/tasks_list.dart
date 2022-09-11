@@ -4,31 +4,29 @@ import '../models/task.dart';
 import 'tasks_tile.dart';
 
 class TasksList extends StatefulWidget {
+  final List<Task> tasks;
+
+  const TasksList({super.key, required this.tasks});
+
   @override
   State<TasksList> createState() => _TasksListState();
 }
 
 class _TasksListState extends State<TasksList> {
-  List<Task> tasks = [
-    Task(name: 'Buy bread.', isCompleted: false),
-    Task(name: 'Buy eggs.', isCompleted: false),
-    Task(name: 'Buy detergent.', isCompleted: true),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
         return TaskTileWidget(
-            label: tasks[index].name,
-            isChecked: tasks[index].isCompleted,
+            label: widget.tasks[index].name,
+            isChecked: widget.tasks[index].isCompleted,
             onTaskChecked: (isChecked) {
               setState(() {
-                tasks[index].isCompleted = isChecked;
+                widget.tasks[index].isCompleted = isChecked;
               });
             });
       },
-      itemCount: tasks.length,
+      itemCount: widget.tasks.length,
     );
   }
 }

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../models/task.dart';
+
 class AddTaskWidget extends StatelessWidget {
-  const AddTaskWidget({Key? key}) : super(key: key);
+  final Function(Task) onTaskAdded;
+
+  const AddTaskWidget({super.key, required this.onTaskAdded});
 
   @override
   Widget build(BuildContext context) {
+    String task = '';
+
     return SingleChildScrollView(
       child: Container(
         padding:
@@ -30,6 +36,9 @@ class AddTaskWidget extends StatelessWidget {
               TextField(
                 textAlign: TextAlign.center,
                 autofocus: true,
+                onChanged: (value) {
+                  task = value;
+                },
               ),
               SizedBox(
                 height: 20,
@@ -38,7 +47,10 @@ class AddTaskWidget extends StatelessWidget {
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  onTaskAdded(Task(name: task, isCompleted: false));
+                  Navigator.pop(context);
+                },
                 child: Text(
                   'Add Task',
                   style: TextStyle(color: Colors.white),
