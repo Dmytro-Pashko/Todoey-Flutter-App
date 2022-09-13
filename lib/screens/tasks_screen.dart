@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 
-import '../models/task.dart';
 import '../widgets/add_task.dart';
 import '../widgets/tasks_list.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy bread.', isCompleted: false),
-    Task(name: 'Buy eggs.', isCompleted: false),
-    Task(name: 'Buy detergent.', isCompleted: true),
-  ];
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +43,7 @@ class _TasksScreenState extends State<TasksScreen> {
                       fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).tasksCount} Tasks',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ],
@@ -62,7 +52,7 @@ class _TasksScreenState extends State<TasksScreen> {
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
-              child: TasksList(tasks: tasks),
+              child: TasksList(),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -87,12 +77,6 @@ class _TasksScreenState extends State<TasksScreen> {
   }
 
   Widget createAddTaskBottomSheet(BuildContext context) {
-    return AddTaskWidget(
-      onTaskAdded: (task) {
-        setState(() {
-          tasks.add(task);
-        });
-      },
-    );
+    return AddTaskWidget();
   }
 }

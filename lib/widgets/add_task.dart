@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 
 import '../models/task.dart';
 
-class AddTaskWidget extends StatelessWidget {
-  final Function(Task) onTaskAdded;
+class AddTaskWidget extends StatefulWidget {
+  @override
+  State<AddTaskWidget> createState() => _AddTaskWidgetState();
+}
 
-  const AddTaskWidget({super.key, required this.onTaskAdded});
+class _AddTaskWidgetState extends State<AddTaskWidget> {
+  String task = '';
 
   @override
   Widget build(BuildContext context) {
-    String task = '';
-
     return SingleChildScrollView(
       child: Container(
         padding:
@@ -48,7 +51,8 @@ class AddTaskWidget extends StatelessWidget {
                   backgroundColor: Colors.lightBlueAccent,
                 ),
                 onPressed: () {
-                  onTaskAdded(Task(name: task, isCompleted: false));
+                  var _task = Task(name: task, isCompleted: false);
+                  Provider.of<TaskData>(context, listen: false).addTask(_task);
                   Navigator.pop(context);
                 },
                 child: Text(
